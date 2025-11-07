@@ -29,7 +29,8 @@ const StyledImage = styled.img`
 const Node = ({ node, x, y }: CustomNodeProps) => {
   const { text, width, height } = node;
   const imagePreviewEnabled = useConfig(state => state.imagePreviewEnabled);
-  const isImage = imagePreviewEnabled && isContentImage(JSON.stringify(text[0].value));
+  const isImage =
+    imagePreviewEnabled && isContentImage(JSON.stringify(text[0].value));
   const value = text[0].value;
 
   return (
@@ -42,7 +43,12 @@ const Node = ({ node, x, y }: CustomNodeProps) => {
     >
       {isImage ? (
         <StyledImageWrapper>
-          <StyledImage src={JSON.stringify(text[0].value)} width="70" height="70" loading="lazy" />
+          <StyledImage
+            src={JSON.stringify(text[0].value)}
+            width="70"
+            height="70"
+            loading="lazy"
+          />
         </StyledImageWrapper>
       ) : (
         <StyledTextNodeWrapper
@@ -51,7 +57,10 @@ const Node = ({ node, x, y }: CustomNodeProps) => {
           data-key={JSON.stringify(text)}
           $isParent={false}
         >
-          <Styled.StyledKey $value={value} $type={typeof text[0].value}>
+          <Styled.StyledKey
+            $value={value}
+            $type={typeof text[0].value}
+          >
             <TextRenderer>{value}</TextRenderer>
           </Styled.StyledKey>
         </StyledTextNodeWrapper>
@@ -61,7 +70,10 @@ const Node = ({ node, x, y }: CustomNodeProps) => {
 };
 
 function propsAreEqual(prev: CustomNodeProps, next: CustomNodeProps) {
-  return prev.node.text === next.node.text && prev.node.width === next.node.width;
+  return (
+    prev.node.text === next.node.text &&
+    prev.node.width === next.node.width
+  );
 }
 
 export const TextNode = React.memo(Node, propsAreEqual);
